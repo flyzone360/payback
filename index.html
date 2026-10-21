@@ -165,10 +165,30 @@ aside{background:color-mix(in srgb,var(--card) 94%,transparent)}
 .bn{margin-top:14px;padding:12px 14px;border-radius:14px;background:rgba(255,159,10,.15);font-size:13px;line-height:1.5}
 .sw{margin:10px 0 0;font-size:14px;font-weight:500}
 #tt{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top,0px));transform:translate(-50%,-160%);z-index:30;background:var(--t);color:var(--bg);padding:10px 16px;border-radius:16px;font-size:14px;font-weight:500;transition:transform .3s cubic-bezier(.2,.9,.3,1.2);max-width:90%;pointer-events:none}#tt.on{transform:translate(-50%,0)}
+.gb{display:flex;align-items:center;gap:6px}
+.nb{border:0;background:rgba(10,132,255,.12);color:var(--blue);font:inherit;font-size:12.5px;font-weight:600;padding:5px 11px;border-radius:14px;cursor:pointer;white-space:nowrap}
+.nav{position:relative}
+.bd{background:#ff375f;color:#fff;font-size:11px;font-weight:700;min-width:18px;height:18px;border-radius:9px;display:grid;place-items:center;padding:0 5px;font-style:normal}
+#main>#cl,#main>.cb{grid-column:1/-1}
+#cl{padding:14px 0 90px;display:flex;flex-direction:column;gap:6px}
+.mb{max-width:78%;padding:8px 12px;border-radius:18px;font-size:15px;line-height:1.4;word-break:break-word;white-space:pre-wrap;display:flex;flex-direction:column;gap:3px}
+.mb.me{align-self:flex-end;background:var(--blue);color:#fff;border-bottom-right-radius:6px}
+.mb.ot{align-self:flex-start;background:var(--card);border:1px solid var(--line);border-bottom-left-radius:6px}
+.mn{font-size:11px;font-weight:600;color:var(--t2)}.mt{font-size:10.5px;opacity:.65;align-self:flex-end}
+.mi{max-width:100%;max-height:280px;min-height:70px;min-width:120px;border-radius:12px;object-fit:cover;background:var(--track);cursor:zoom-in}
+.mf{border:0;background:rgba(127,127,127,.18);color:inherit;font:inherit;font-size:14px;padding:10px 12px;border-radius:12px;text-align:left;cursor:pointer}.mf small{display:block;opacity:.7;font-size:11px;margin-top:2px}
+.ld{opacity:.6;font-size:13px}.dsp{align-self:center;font-size:11.5px;color:var(--t2);margin:10px 0 4px}
+.cb{position:sticky;bottom:12px;display:flex;gap:8px;align-items:center;padding:8px;border-radius:22px;background:var(--card);border:1px solid var(--line);box-shadow:0 4px 20px rgba(0,0,0,.08);z-index:3}
+.cb input[type=text]{flex:1;min-width:0;border:0;background:none;color:var(--t);font:inherit;font-size:16px;outline:none;padding:6px 4px}
+.cb .tipb{margin:0;padding:9px 16px}
+.nt{padding:10px 12px;border-radius:14px;background:rgba(127,127,127,.1);margin:8px 0;white-space:pre-wrap;font-size:14.5px;line-height:1.5}
+.nt small{color:var(--t2);font-size:11.5px;display:block;margin-bottom:3px}.nt .nx{float:right;border:0;background:none;color:#ff375f;font:inherit;font-size:12px;cursor:pointer}
+.ta{width:100%;margin-top:14px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--t);font:inherit;font-size:16px;resize:vertical;outline:none}
+@media(max-width:800px){.bd{position:absolute;top:2px;right:8px}.cb{bottom:calc(84px + env(safe-area-inset-bottom,0px))}}
 </style>
 </head>
 <body>
-<aside id="side"></aside><div id="hint" class="hint"><span>›</span></div><div id="pf"></div><div id="pk"></div><div id="dr"></div><div id="tt"></div>
+<aside id="side"></aside><div id="hint" class="hint"><span>›</span></div><div id="pf"></div><div id="pk"></div><div id="dr"></div><div id="tt"></div><div id="lk"></div>
 <main><div class="wrap" id="main"></div></main>
 <script>
 /* PASTE YOUR FIREBASE REALTIME DATABASE URL BETWEEN THE QUOTES, e.g. "https://your-project-default-rtdb.firebaseio.com" */
@@ -201,7 +221,7 @@ geo:["Keep an atlas or map open. Locate rivers, mountains, passes and borders as
 pol:["Learn article numbers: Fundamental Rights (12-35), DPSP (36-51), Fundamental Duties (51A), Emergency (352, 356, 360).","Fundamental Rights is the biggest topic (about 40 lectures), so make one summary table.","Know the constitutional development acts (1773 to 1950) in order with their key features.","Revise Union, Governor and High Court topics using PYQs."],
 eco:["First understand the concepts (demand, supply, money, inflation). Memorising without understanding fails.","Banking, RBI, Budget and Monetary Policy link directly to current affairs, so read monthly updates.","Learn full forms and key terms (CRR, SLR, repo rate, GDP, GNP).","Make one-page notes for Finance Commission, Planning and Taxes."],
 eng:["Learn 10 new words daily and revise them. Use the Vocab classes as flashcards.","Read one newspaper editorial for 15 minutes every day.","After each grammar topic (Tense, Modals, Preposition and so on) solve its practice set immediately.","Idioms and One Word Substitutions: learn 10 a day and revise weekly.","Practise Cloze Test and Para-jumbles daily. Both can be scored with practice.","Reading comprehension: read the questions first, then the passage."]};
-function drawer(){var e=document.getElementById("dr");if(!tip){e.innerHTML="";return}var T=0,C=0;D.forEach(function(s){T+=s.tot;C+=cnt(s)});var left=T-C,s=D.filter(function(x){return x.id==view})[0];var li=function(a){return"<ul>"+a.map(function(x){return"<li>"+x+"</li>"}).join("")+"</ul>"};var h='<div class="ovl" data-tip="0"></div><div class="pane"><div class="ph"><b>💡 Tips and Study Plan</b><button class="all" data-tip="0">Close</button></div><h3>Your pace</h3><p>'+left+' lectures left ('+C+' of '+T+' done). At 3 lectures a day you finish in about '+Math.ceil(left/3)+' days, at 5 a day in about '+Math.ceil(left/5)+' days.</p>';if(s)h+='<h3>'+s.e+' '+s.name+' tips</h3>'+li(TIPS[s.id]);h+='<h3>What aspirants commonly advise</h3><p>General advice repeated by aspirants on Reddit, YouTube and coaching blogs, plus my own knowledge. These are common patterns, not exact quotes.</p>'+li(TIPS.real)+'<h3>Beginner roadmap</h3>'+li(TIPS.road)+'<h3>SSC exam at a glance</h3>'+li(TIPS.exam)+'<h3>Mistakes to avoid</h3>'+li(TIPS.mist);e.innerHTML=h+'</div>'}
+function drawer(){var e=document.getElementById("dr");if(np){if(!document.getElementById("nl"))buildNotes();nlist();return}if(!tip){e.innerHTML="";return}var T=0,C=0;D.forEach(function(s){T+=s.tot;C+=cnt(s)});var left=T-C,s=D.filter(function(x){return x.id==view})[0];var li=function(a){return"<ul>"+a.map(function(x){return"<li>"+x+"</li>"}).join("")+"</ul>"};var h='<div class="ovl" data-tip="0"></div><div class="pane"><div class="ph"><b>💡 Tips and Study Plan</b><button class="all" data-tip="0">Close</button></div><h3>Your pace</h3><p>'+left+' lectures left ('+C+' of '+T+' done). At 3 lectures a day you finish in about '+Math.ceil(left/3)+' days, at 5 a day in about '+Math.ceil(left/5)+' days.</p>';if(s)h+='<h3>'+s.e+' '+s.name+' tips</h3>'+li(TIPS[s.id]);h+='<h3>What aspirants commonly advise</h3><p>General advice repeated by aspirants on Reddit, YouTube and coaching blogs, plus my own knowledge. These are common patterns, not exact quotes.</p>'+li(TIPS.real)+'<h3>Beginner roadmap</h3>'+li(TIPS.road)+'<h3>SSC exam at a glance</h3>'+li(TIPS.exam)+'<h3>Mistakes to avoid</h3>'+li(TIPS.mist);e.innerHTML=h+'</div>'}
 var done={},view="all",flt="all",q="";
 var URL_=(DB_URL||"").replace(/\/+$/,"");
 var DONE={travis:{},hazel:{}},me=null,OLD={},R={},Q={},got=false,es=null,fi=false,ft=null,rt=null,st=0,lastSig="";
@@ -219,7 +239,7 @@ function other(){return me=="hazel"?"travis":"hazel"}
 /* ---- write queue: every change goes to the DB as a tiny multi-path PATCH ---- */
 function wr(path,val){Q[path]=val;pq();if(URL_){clearTimeout(ft);ft=setTimeout(flush,250)}}
 async function flush(){if(!URL_||fi)return;var ks=Object.keys(Q);if(!ks.length)return;var snap={};ks.forEach(function(k){snap[k]=Q[k]});fi=true;var ok=false;
- try{var r=await fetch(URL_+"/.json",{method:"PATCH",body:JSON.stringify(snap),keepalive:true});if(!r.ok)throw 0;ks.forEach(function(k){if(Q[k]===snap[k])delete Q[k]});pq();setSY(es&&es.readyState==1?"Live":"Connecting…");ok=true}
+ try{var r=await fetch(URL_+"/.json",{method:"PATCH",body:JSON.stringify(snap),keepalive:true});if(!r.ok)throw 0;ks.forEach(function(k){if(Q[k]===snap[k])delete Q[k]});pq();setSY(live()?"Live":"Connecting…");ok=true}
  catch(e){setSY("Offline, will sync")}
  fi=false;if(Object.keys(Q).length){clearTimeout(ft);ft=setTimeout(flush,ok?300:3000)}}
 function mark(k,on){var p="progress/"+me+"/d/"+k;if(on){done[k]=Date.now();wr(p,done[k])}else{delete done[k];wr(p,null)}}
@@ -231,16 +251,127 @@ function setP(path,val,merge){var p=path.split("/").filter(Boolean);
 function migrate(){try{if(localStorage.getItem("cw_mig")==URL_)return;localStorage.setItem("cw_mig",URL_)}catch(e){return}
  ["travis","hazel"].forEach(function(u){var rd=(R.progress&&R.progress[u]&&R.progress[u].d)||{};Object.keys(DONE[u]).forEach(function(k){if(!rd[k])wr("progress/"+u+"/d/"+k,DONE[u][k])})})}
 function apply(){var pr=R.progress||{};["travis","hazel"].forEach(function(u){var d={},rd=(pr[u]&&pr[u].d)||{};Object.keys(rd).forEach(function(k){d[k]=rd[k]});var pf="progress/"+u+"/d/";Object.keys(Q).forEach(function(k){if(k.indexOf(pf)==0){var kk=k.slice(pf.length);if(Q[k]===null)delete d[kk];else d[kk]=Q[k]}});DONE[u]=d});done=me?DONE[me]:{};persist()}
-function sig(){var g=function(u){return(R.progress&&R.progress[u]&&R.progress[u].goal)||""};return["travis","hazel"].map(function(u){var n=0,s=0;for(var k in DONE[u]){n++;s+=+DONE[u][k]||0}return n+":"+s+":"+g(u)}).join("|")}
-function sched(){if(st)return;st=setTimeout(function(){st=0;apply();var g=sig();if(g!=lastSig){lastSig=g;render()}else{updLb();prof()}toast()},80)}
-function conn(){if(!URL_)return;try{es&&es.close()}catch(e){}clearTimeout(rt);
- es=new EventSource(URL_+"/.json");
- es.onopen=function(){setSY(Object.keys(Q).length?"Syncing…":"Live");flush()};
- es.addEventListener("put",function(e){var m=JSON.parse(e.data);setP(m.path,m.data);if(!got){got=true;migrate();setSY("Live")}sched()});
- es.addEventListener("patch",function(e){var m=JSON.parse(e.data),d=m.data||{},b=m.path=="/"?"":m.path;Object.keys(d).forEach(function(k){setP(b+"/"+k,d[k])});sched()});
- var bad=function(){try{es.close()}catch(x){}setSY("Reconnecting…");clearTimeout(rt);rt=setTimeout(conn,3000)};
- es.addEventListener("cancel",bad);es.addEventListener("auth_revoked",bad);
- es.onerror=function(){setSY("Reconnecting…");if(es.readyState==2){clearTimeout(rt);rt=setTimeout(conn,3000)}}}
+function sig(){var g=function(u){return(R.progress&&R.progress[u]&&R.progress[u].goal)||""};return["travis","hazel"].map(function(u){var n=0,s=0;for(var k in DONE[u]){n++;s+=+DONE[u][k]||0}return n+":"+s+":"+g(u)}).join("|")+"|"+nnotes()}
+function sched(){if(st)return;st=setTimeout(function(){st=0;apply();var g=sig();if(g!=lastSig){lastSig=g;render()}else{updLb();prof()}toast();chatTick();if(view=="chat")chatRender()},80)}
+/* ===== live streams (one per path so chat photos never load unless asked) ===== */
+var ES={},GOT={},ST=[["progress",""],["presence",""],["nudge",""],["notes",""],["chat","?orderBy=%22%24key%22&limitToLast=80"]];
+function live(){return ES.progress&&ES.progress.readyState==1}
+function dead(){return!ES.progress||ES.progress.readyState==2}
+function opn(p,qs){try{ES[p]&&ES[p].close()}catch(e){}
+ var e=new EventSource(URL_+"/"+p+".json"+qs);ES[p]=e;
+ e.onopen=function(){if(p=="progress"){setSY(Object.keys(Q).length?"Syncing…":"Live");flush()}};
+ e.addEventListener("put",function(ev){var m=JSON.parse(ev.data);setP("/"+p+(m.path=="/"?"":m.path),m.data);if(!GOT[p]){GOT[p]=1;if(p=="progress"){migrate();setSY("Live")}}sched()});
+ e.addEventListener("patch",function(ev){var m=JSON.parse(ev.data),d=m.data||{},b="/"+p+(m.path=="/"?"":m.path);Object.keys(d).forEach(function(k){setP(b+"/"+k,d[k])});sched()});
+ var bad=function(){try{e.close()}catch(x){}if(p=="progress")setSY("Reconnecting…");setTimeout(function(){if(ES[p]===e)opn(p,qs)},3000)};
+ e.addEventListener("cancel",bad);e.addEventListener("auth_revoked",bad);
+ e.onerror=function(){if(p=="progress")setSY("Reconnecting…");if(e.readyState==2)setTimeout(function(){if(ES[p]===e)opn(p,qs)},3000)}}
+function conn(){if(!URL_)return;ST.forEach(function(x){opn(x[0],x[1])})}
+/* ===== end-to-end encryption (password never stored in this file) ===== */
+var KEY=null;
+async function mk(pw){var e=new TextEncoder();var b=await crypto.subtle.importKey("raw",e.encode(pw),"PBKDF2",false,["deriveKey"]);return crypto.subtle.deriveKey({name:"PBKDF2",salt:e.encode("payback-ssc-v1"),iterations:200000,hash:"SHA-256"},b,{name:"AES-GCM",length:256},false,["encrypt","decrypt"])}
+function b64(buf){var a=new Uint8Array(buf),s="";for(var i=0;i<a.length;i+=32768)s+=String.fromCharCode.apply(null,a.subarray(i,i+32768));return btoa(s)}
+function unb64(s){var b=atob(s),a=new Uint8Array(b.length);for(var i=0;i<b.length;i++)a[i]=b.charCodeAt(i);return a}
+async function encB(u8){var iv=crypto.getRandomValues(new Uint8Array(12));var ct=await crypto.subtle.encrypt({name:"AES-GCM",iv:iv},KEY,u8);return b64(iv)+"."+b64(ct)}
+async function decB(str){var p=str.split(".");return new Uint8Array(await crypto.subtle.decrypt({name:"AES-GCM",iv:unb64(p[0])},KEY,unb64(p[1])))}
+async function enc(o){return encB(new TextEncoder().encode(JSON.stringify(o)))}
+async function dec(s){return JSON.parse(new TextDecoder().decode(await decB(s)))}
+
+var lk=false,CH={},CHP={},BU={},BP={},KN={},cinit=false,cdraft="",ndraft="",np=null,ND={},NDP={},lastU=0,stick=true,crt=0,SWR=null;
+function esc(t){return String(t).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function mkKey(){return String(Date.now())+Math.random().toString(36).slice(2,6)}
+function fs(n){return n>1e6?(n/1e6).toFixed(1)+" MB":Math.max(1,Math.round(n/1e3))+" KB"}
+function hm(t){try{return new Date(t).toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})}catch(e){return""}}
+function dl_(t){try{return new Date(t).toLocaleDateString([],{day:"numeric",month:"short"})}catch(e){return""}}
+async function unlock(pw,silent){var k=null;try{k=await mk(pw);KEY=k;
+  if(URL_){var r=await fetch(URL_+"/meta/check.json");if(!r.ok)throw 1;var c=await r.json();
+   if(c){try{await dec(c)}catch(e){KEY=null;return"bad"}}
+   else{var v=await enc({ok:"payback"});var w=await fetch(URL_+"/meta/check.json",{method:"PUT",body:JSON.stringify(v)});if(!w.ok)throw 1}}
+  try{localStorage.setItem("cw_pw",pw)}catch(e){}return"ok"}
+ catch(e){if(silent&&k){KEY=k;return"ok"}KEY=null;return"err"}}
+function lockUI(){var e=document.getElementById("lk");if(!e)return;if(!lk){e.innerHTML="";return}
+ e.innerHTML='<div class="ovl2"><div class="pkc"><h2>🔒 Chat password</h2><p>Chat and notes are end-to-end encrypted. Type the password you both agreed on. It stays only on this device.</p><input class="search" id="pwi" type="password" autocomplete="off" placeholder="Password" style="width:100%;margin-bottom:10px"><div id="pwe" style="color:#ff375f;font-size:13px;min-height:20px;margin-bottom:8px"></div><div class="pkr"><button class="pkb" data-lkc="1" style="padding:12px 8px">Cancel</button><button class="pkb" data-unlock="1" style="padding:12px 8px;background:var(--blue);color:#fff;border:0">Unlock</button></div></div></div>';
+ setTimeout(function(){var i=document.getElementById("pwi");if(i)i.focus()},50)}
+async function doUnlock(){var i=document.getElementById("pwi"),er=document.getElementById("pwe");if(!i)return;var pw=i.value;
+ if(!pw){er.textContent="Type the password";return}
+ if(!window.crypto||!crypto.subtle){er.textContent="Encryption needs https (works on GitHub Pages)";return}
+ er.textContent="Checking…";var r=await unlock(pw,false);
+ if(r=="ok"){lk=false;lockUI();CH={};ND={};chatSoon();nlist();render()}else er.textContent=r=="bad"?"Wrong password":"Could not reach the database"}
+function autoUnlock(){var pw=null;try{pw=localStorage.getItem("cw_pw")}catch(e){}if(!pw||!window.crypto||!crypto.subtle)return;
+ unlock(pw,true).then(function(r){if(r=="ok"){CH={};ND={};chatSoon();nlist();render()}else if(r=="bad"){try{localStorage.removeItem("cw_pw")}catch(e){}}})}
+/* ===== alerts ===== */
+try{if("serviceWorker" in navigator&&location.protocol!="file:")navigator.serviceWorker.register("sw.js").then(function(r){SWR=r}).catch(function(){})}catch(e){}
+function nbtn(){try{return("Notification" in window&&Notification.permission=="default")?' <button class="tipb" data-bn="1">🔔 Turn on alerts</button>':""}catch(e){return""}}
+function notify(t,b){try{if(!document.hidden||!("Notification" in window)||Notification.permission!="granted")return;var o={body:b,tag:"payback-"+Date.now()%1000};if(SWR&&SWR.showNotification)SWR.showNotification(t,o);else new Notification(t,o)}catch(e){}}
+/* ===== chat ===== */
+function CSn(){try{return+localStorage.getItem("cw_cs_"+me)||0}catch(e){return 0}}
+function unread(){var n=0,c=R.chat||{},s=CSn();for(var k in c)if(c[k].f!=me&&c[k].t>s)n++;return n}
+function seenNow(){if(view!="chat"||document.hidden)return;var m=0,c=R.chat||{};for(var k in c)if(c[k].t>m)m=c[k].t;if(m>CSn()){try{localStorage.setItem("cw_cs_"+me,m)}catch(e){}}if(lastU){lastU=0;side();document.title="Payback SSC"}}
+function chatSoon(){clearTimeout(crt);crt=setTimeout(chatRender,40)}
+function ensure(k,v){if(CH[k]||CHP[k]||!KEY)return;CHP[k]=1;dec(v.c).then(function(o){CH[k]=o}).catch(function(){CH[k]={e:1}}).then(function(){delete CHP[k];chatSoon()})}
+function chatRender(){var el=document.getElementById("cl");if(!el||view!="chat")return;
+ var hd=document.getElementById("cs0");if(hd)hd.innerHTML=(URL_?"🔒 End-to-end encrypted. Firebase only sees scrambled text.":"⚠️ Database not connected.")+nbtn();
+ if(!KEY){el.innerHTML='<div class="empty">🔒 Locked<br><button class="tipb" data-lkn="1" style="margin:14px 0 0">Enter password</button></div>';return}
+ var mn=document.querySelector("main"),near=!el.dataset.r||mn.scrollHeight-mn.scrollTop-mn.clientHeight<160;
+ var items=Object.keys(R.chat||{}).sort(),h="",last="";
+ if(!items.length)h='<div class="empty">No messages yet. Say hi 👋</div>';
+ items.forEach(function(k){var v=R.chat[k];if(!v||!v.c)return;ensure(k,v);var o=CH[k],mine=v.f==me,day=dl_(v.t);
+  if(day!=last){last=day;h+='<div class="dsp">'+esc(day)+'</div>'}
+  var body="";
+  if(!o)body='<i class="ld">…</i>';
+  else if(o.e)body='<i class="ld">Cannot decrypt (different password?)</i>';
+  else{if(o.ty=="img")body+='<img class="mi" data-b="'+esc(o.b)+'" alt="photo">';
+   else if(o.ty=="doc")body+='<button class="mf" data-dl="'+esc(o.b)+'" data-n="'+esc(o.n)+'" data-m="'+esc(o.m||"")+'">📄 '+esc(o.n)+'<small>'+fs(o.sz||0)+' · tap to download</small></button>';
+   if(o.x)body+='<div>'+esc(o.x)+'</div>'}
+  h+='<div class="mb '+(mine?"me":"ot")+'">'+(mine?"":'<small class="mn">'+esc(NM[v.f]||"")+'</small>')+body+'<small class="mt">'+hm(v.t)+'</small></div>'});
+ el.innerHTML=h;el.dataset.r=1;stick=near;
+ if(near){mn.scrollTop=mn.scrollHeight;setTimeout(function(){mn.scrollTop=mn.scrollHeight},30)}
+ el.querySelectorAll("img[data-b]").forEach(loadImg);seenNow()}
+function loadImg(im){var id=im.dataset.b;im.onload=function(){if(stick){var m=document.querySelector("main");m.scrollTop=m.scrollHeight}};
+ if(BU[id]){im.src=BU[id];return}if(BP[id])return;BP[id]=1;
+ getBlob(id,"image/jpeg").then(function(u){BU[id]=u;delete BP[id];document.querySelectorAll('img[data-b="'+id+'"]').forEach(function(i){i.src=u})}).catch(function(){delete BP[id]})}
+async function getBlob(id,mime){var r=await fetch(URL_+"/blobs/"+id+".json");if(!r.ok)throw 0;var s=await r.json();if(!s)throw 0;var u8=await decB(s);return URL.createObjectURL(new Blob([u8],{type:mime||"application/octet-stream"}))}
+function dl(b){getBlob(b.dataset.dl,b.dataset.m).then(function(u){var a=document.createElement("a");a.href=u;a.download=b.dataset.n||"file";document.body.appendChild(a);a.click();a.remove()}).catch(function(){showToast("Could not download")})}
+function shrink(file,max,q){return new Promise(function(res,rej){var u=URL.createObjectURL(file),im=new Image();im.onload=function(){var r=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*r);c.height=Math.round(im.height*r);c.getContext("2d").drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);c.toBlob(function(b){b?res(b):rej()},"image/jpeg",q)};im.onerror=rej;im.src=u})}
+async function postMsg(o){var k=mkKey(),v={f:me,t:Date.now(),c:await enc(o)};R.chat=R.chat||{};R.chat[k]=v;CH[k]=o;KN[k]=1;wr("chat/"+k,v);chatRender()}
+async function sendText(){var i=document.getElementById("ci");if(!i)return;var t=i.value.trim();if(!t)return;
+ if(!URL_){showToast("Database not connected");return}if(!KEY){lk=true;lockUI();return}
+ i.value="";cdraft="";try{await postMsg({x:t})}catch(e){showToast("Could not send")}}
+async function sendFile(t){var f=t.files&&t.files[0];t.value="";if(!f)return;
+ if(!URL_){showToast("Database not connected");return}if(!KEY){lk=true;lockUI();return}
+ try{showToast("Encrypting and sending…");var img=t.id=="fimg",bytes,mime=f.type||"application/octet-stream";
+  if(img){var bl=await shrink(f,1000,.65);if(bl.size>350e3)bl=await shrink(f,760,.5);bytes=new Uint8Array(await bl.arrayBuffer());mime="image/jpeg"}
+  else{if(f.size>900e3){showToast("Document too big. Max about 900 KB");return}bytes=new Uint8Array(await f.arrayBuffer())}
+  var id=mkKey()+"b",r=await fetch(URL_+"/blobs/"+id+".json",{method:"PUT",body:JSON.stringify(await encB(bytes))});if(!r.ok)throw 1;
+  await postMsg({ty:img?"img":"doc",b:id,n:f.name,m:mime,sz:bytes.length,x:""});showToast("Sent ✓")}
+ catch(e){showToast("Could not send. Check internet")}}
+function chatTick(){if(!GOT.chat)return;var c=R.chat||{},ks=Object.keys(c);
+ if(!cinit){ks.forEach(function(k){KN[k]=1});cinit=true}
+ else ks.forEach(function(k){if(KN[k])return;KN[k]=1;var v=c[k];if(!v||v.f==me)return;if(view=="chat"&&!document.hidden)return;
+  var f=function(){var o=CH[k],txt=o&&!o.e?(o.x||(o.ty=="img"?"📷 Photo":"📄 "+(o.n||"File"))):"New message";showToast((NM[v.f]||"")+": "+String(txt).slice(0,80));notify(NM[v.f]||"Payback",String(txt).slice(0,120))};
+  if(KEY&&!CH[k])dec(v.c).then(function(o){CH[k]=o;f()}).catch(f);else f()});
+ var u=unread();if(u!=lastU){lastU=u;side();document.title=(u?"("+u+") ":"")+"Payback SSC"}}
+/* ===== chapter notes ===== */
+function nget(sid,gi){return(R.notes&&R.notes[sid]&&R.notes[sid]["c"+gi])||{}}
+function nl(s,gi){var n=Object.keys(nget(s.id,gi)).length;return n?"📝 "+n:"＋ Note"}
+function nnotes(){var n=0;for(var a in(R.notes||{}))for(var b in R.notes[a])n+=Object.keys(R.notes[a][b]).length;return n}
+function buildNotes(){var e=document.getElementById("dr"),s=D.filter(function(x){return x.id==np.sid})[0],g=s.g[np.gi];
+ e.innerHTML='<div class="ovl" data-np="-1"></div><div class="pane"><div class="ph"><b>📝 '+esc(g.t)+'</b><button class="all" data-np="-1">Close</button></div><p style="color:var(--t2);font-size:13px">'+s.e+' '+s.name+' · shared notes, both of you see these · 🔒 encrypted</p><div id="nl"></div><textarea id="ni" class="ta" rows="3" placeholder="Write something useful about this chapter…"></textarea><button class="tipb" data-na="1" style="margin:10px 0 0">Add note</button></div>';
+ document.getElementById("ni").value=ndraft}
+function nlist(){var el=document.getElementById("nl");if(!el||!np)return;
+ if(!KEY){el.innerHTML='<p style="color:var(--t2)">🔒 Locked.</p><button class="tipb" data-lkn="1" style="margin:8px 0">Enter password</button>';return}
+ var o=nget(np.sid,np.gi),ks=Object.keys(o).sort(),h="";
+ if(!ks.length)h='<p style="color:var(--t2)">No notes yet. Add the first one 👇</p>';
+ ks.forEach(function(k){var v=o[k],kk=np.sid+"/"+np.gi+"/"+k;
+  if(ND[kk]===undefined&&!NDP[kk]){NDP[kk]=1;dec(v.c).then(function(x){ND[kk]=x}).catch(function(){ND[kk]={e:1}}).then(function(){delete NDP[kk];nlist()})}
+  var x=ND[kk],t=x?(x.e?"Cannot decrypt":esc(x.x)):"…";
+  h+='<div class="nt"><small>'+esc(NM[v.f]||"")+' · '+dl_(v.t)+' '+hm(v.t)+(v.f==me?'<button class="nx" data-nx="'+k+'">Delete</button>':'')+'</small>'+t+'</div>'});
+ el.innerHTML=h}
+async function addNote(){if(!np)return;if(!KEY){lk=true;lockUI();return}var ta=document.getElementById("ni");if(!ta)return;var t=ta.value.trim();if(!t)return;
+ ndraft="";ta.value="";var sid=np.sid,gi=np.gi,k=mkKey(),v={f:me,t:Date.now(),c:await enc({x:t})};
+ R.notes=R.notes||{};R.notes[sid]=R.notes[sid]||{};R.notes[sid]["c"+gi]=R.notes[sid]["c"+gi]||{};R.notes[sid]["c"+gi][k]=v;ND[sid+"/"+gi+"/"+k]={x:t};
+ wr("notes/"+sid+"/c"+gi+"/"+k,v);nlist();render()}
+function delNote(k){if(!np)return;var o=nget(np.sid,np.gi);if(!o[k]||o[k].f!=me)return;delete o[k];wr("notes/"+np.sid+"/c"+np.gi+"/"+k,null);nlist();render()}
+
 function beat(){if(!URL_||!me||document.hidden)return;fetch(URL_+"/presence/"+me+".json",{method:"PUT",body:JSON.stringify(Date.now()),keepalive:true}).catch(function(){})}
 function on(u){var t=R.presence&&R.presence[u];return!!t&&Math.abs(Date.now()-t)<15000}
 /* ---- stats ---- */
@@ -259,7 +390,7 @@ function lb(){var T=0,A={travis:0,hazel:0};D.forEach(function(s){T+=s.tot;A.trav
  var mx=1;S.travis.w.concat(S.hazel.w).forEach(function(v){if(v>mx)mx=v});
  h+='<div class="wk">';for(var j=0;j<7;j++){var dd=new Date();dd.setDate(dd.getDate()-(6-j));h+='<div class="wc"><div class="wb"><i style="height:'+(S.travis.w[j]/mx*100)+'%;background:#0a84ff"></i><i style="height:'+(S.hazel.w[j]/mx*100)+'%;background:#ff375f"></i></div><small>'+"SMTWTFS".charAt(dd.getDay())+'</small></div>'}
  h+='</div><div class="wl">Last 7 days: Travis '+S.travis.wk+' · Hazel '+S.hazel.wk+' lectures</div>';
- if(me)h+='<div class="lbf"><span>My daily goal <b>'+S[me].goal+'</b></span><button class="ib" data-gl="-1">−</button><button class="ib" data-gl="1">+</button>'+(URL_?'<button class="tipb" data-nd="👏 Keep going!">👏 Cheer '+NM[other()]+'</button><button class="tipb" data-nd="⏰ Time to study!">⏰ Nudge</button>':'')+'</div>';
+ if(me)h+='<div class="lbf"><span>My daily goal <b>'+S[me].goal+'</b></span><button class="ib" data-gl="-1">−</button><button class="ib" data-gl="1">+</button>'+(URL_?'<button class="tipb" data-nd="👏 Keep going!">👏 Cheer '+NM[other()]+'</button><button class="tipb" data-nd="⏰ Time to study!">⏰ Time to study</button><button class="tipb" data-nd="📚 Aaj ka target pura karo!">📚 Target</button>':'')+nbtn()+'</div>';
  return h}
 function updLb(){var e=document.getElementById("lb");if(e&&view=="all")e.innerHTML=lb()}
 function sw(s){var a=pc(cnt(s,"travis"),s.tot),b=pc(cnt(s,"hazel"),s.tot);return"Travis "+a+"% · Hazel "+b+"%"+(a==b?"":" · 👑 "+(a>b?"Travis":"Hazel"))}
@@ -267,7 +398,7 @@ function swl(s){var a=cnt(s,"travis"),b=cnt(s,"hazel"),pa=pct1(a,s.tot),pb=pct1(
 function bn(){return URL_?"":'<div class="bn">⚠️ Database not connected. Progress is saved only on this device. Set <b>DB_URL</b> at the top of the script to turn on live sync.</div>'}
 var tmo=null;function showToast(t){var e=document.getElementById("tt");if(!e)return;e.textContent=t;e.classList.add("on");clearTimeout(tmo);tmo=setTimeout(function(){e.classList.remove("on")},4500)}
 function nudge(m){if(!URL_||!me)return;var o=other(),v={f:me,t:Date.now(),m:m};R.nudge=R.nudge||{};R.nudge[o]=v;fetch(URL_+"/nudge/"+o+".json",{method:"PUT",body:JSON.stringify(v)}).catch(function(){});showToast("Sent to "+NM[o]+": "+m)}
-function toast(){try{if(!me||!R.nudge)return;var n=R.nudge[me];if(!n||!n.t||n.f==me)return;var seen=+localStorage.getItem("cw_nt")||0;if(n.t>seen){localStorage.setItem("cw_nt",n.t);if(Date.now()-n.t<36e5)showToast((NM[n.f]||"")+": "+String(n.m).slice(0,80))}}catch(e){}}
+function toast(){try{if(!me||!R.nudge)return;var n=R.nudge[me];if(!n||!n.t||n.f==me)return;var seen=+localStorage.getItem("cw_nt")||0;if(n.t>seen){localStorage.setItem("cw_nt",n.t);if(Date.now()-n.t<36e5){showToast((NM[n.f]||"")+": "+String(n.m).slice(0,80));notify(NM[n.f]||"Payback",String(n.m).slice(0,80))}}}catch(e){}}
 /* ---- fast path for a single tap: touch only what changed, no full re-render ---- */
 function quick(b){var s=D.filter(function(x){return x.id==view})[0];if(!s)return;b.classList.toggle("d",!!done[b.dataset.k]);
  var grp=b.closest(".grp"),a=grp.querySelector(".all"),g=s.g[+a.dataset.g],gd=g.n.filter(function(n){return done[s.id+"-"+n]}).length;
@@ -284,9 +415,10 @@ function side(){
  var h='<div class="brand"><b>Payback SSC</b><span>'+SY+'</span></div><div class="lbl">Overview</div>';
  h+='<button class="nav '+(view=="all"?"on":"")+'" data-v="all"><span class="e">🏠</span><span class="n">All Subjects</span><small>'+C+'/'+T+'</small></button><div class="lbl">Subjects</div>';
  D.forEach(function(s){var c=cnt(s);h+='<button class="nav '+(view==s.id?"on":"")+'" data-v="'+s.id+'"><span class="e">'+s.e+'</span><span class="n">'+s.name+'</span><small>'+c+'/'+s.tot+'</small></button>'});
- h+='<div class="lbl">Help</div><button class="nav" data-tip="1"><span class="e">💡</span><span class="n">Tips and Study Plan</span></button>';document.getElementById("side").innerHTML=h}
+ h+='<div class="lbl">Together</div><button class="nav '+(view=="chat"?"on":"")+'" data-v="chat"><span class="e">💬</span><span class="n">Chat</span>'+(unread()?'<b class="bd">'+unread()+'</b>':"")+'</button><div class="lbl">Help</div><button class="nav" data-tip="1"><span class="e">💡</span><span class="n">Tips and Study Plan</span></button>';document.getElementById("side").innerHTML=h}
 function main(){
  var m=document.getElementById("main"),h="";
+ if(view=="chat"){if(!document.getElementById("cl")){m.innerHTML='<h1>💬 Chat</h1><p class="sub" id="cs0"></p><div id="cl"></div><div class="cb"><button class="ib" data-fp="img" aria-label="Photo">📷</button><button class="ib" data-fp="doc" aria-label="Document">📎</button><input type="text" id="ci" placeholder="Message" autocomplete="off"><button class="tipb" data-cs="1">Send</button></div><input type="file" id="fimg" accept="image/*" hidden><input type="file" id="fdoc" hidden>';document.getElementById("ci").value=cdraft}chatRender();return}
  if(view=="all"){
   var T=0,C=0;D.forEach(function(s){T+=s.tot;C+=cnt(s)});
   h+='<h1>Your Progress</h1><p class="sub">'+C+' / '+T+' lectures complete ('+pc(C,T)+'%)</p><div class="bar"><i style="width:'+pc(C,T)+'%;background:var(--blue)"></i></div>'+bn()+'<div class="lbx" id="lb">'+lb()+'</div><div class="ov">';
@@ -301,7 +433,7 @@ function main(){
    var ns=g.n.filter(function(n){var d=!!done[s.id+"-"+n];if(flt=="todo"&&d)return false;if(flt=="done"&&!d)return false;if(ql&&g.t.toLowerCase().indexOf(ql)<0&&("lecture "+n).indexOf(ql)<0&&String(n)!=ql)return false;return true});
    if(!ns.length)return;shown++;
    var gd=g.n.filter(function(n){return done[s.id+"-"+n]}).length;
-   h+='<div class="grp" style="--c:'+s.c+'"><div class="gh"><div><b>'+g.t+'</b><span>'+gd+'/'+g.n.length+'</span></div><button class="all" data-g="'+gi+'">'+(gd==g.n.length?"Unmark all":"Mark all done")+'</button></div>'+(CT[g.t]?'<p class="ct">💡 '+CT[g.t]+'</p>':'')+'<div class="items">';
+   h+='<div class="grp" style="--c:'+s.c+'"><div class="gh"><div><b>'+g.t+'</b><span>'+gd+'/'+g.n.length+'</span></div><div class="gb"><button class="nb" data-np="'+gi+'">'+nl(s,gi)+'</button><button class="all" data-g="'+gi+'">'+(gd==g.n.length?"Unmark all":"Mark all done")+'</button></div></div>'+(CT[g.t]?'<p class="ct">💡 '+CT[g.t]+'</p>':'')+'<div class="items">';
    ns.forEach(function(n){var d=done[s.id+"-"+n];h+='<button class="it'+(d?" d":"")+'" data-k="'+s.id+'-'+n+'"><span class="ck"><svg viewBox="0 0 12 12"><path d="M2 6.5l2.6 2.6L10 3.5"/></svg></span><span class="tx">Lecture '+n+'<small>'+info(s,g,n)+'</small></span></button>'});
    h+='</div></div>'});
   if(!shown)h+='<div class="empty">Nothing found</div>'}
@@ -309,20 +441,32 @@ function main(){
  var qi=document.getElementById("q");if(qi&&document.activeElement===document.body&&q){}
 }
 function render(){var y=document.querySelector("main").scrollTop,f=document.activeElement&&document.activeElement.id=="q";side();main();drawer();hint();prof();document.querySelector("main").scrollTop=y;if(f){var i=document.getElementById("q");i.focus();i.setSelectionRange(q.length,q.length)}}
-document.addEventListener("click",function(e){
- var b=e.target.closest("[data-v],[data-k],[data-f],[data-g],[data-tip],[data-s],[data-u],[data-pm],[data-gl],[data-nd]");if(!b)return;
+document.addEventListener("click",function(e){var im=e.target.closest&&e.target.closest("img.mi");if(im&&im.src){window.open(im.src,"_blank");return}
+ var b=e.target.closest("[data-v],[data-k],[data-f],[data-g],[data-tip],[data-s],[data-u],[data-pm],[data-gl],[data-nd],[data-np],[data-na],[data-nx],[data-unlock],[data-lkc],[data-lkn],[data-cs],[data-fp],[data-dl],[data-bn]");if(!b)return;
+ if(b.dataset.np!==undefined){var n=+b.dataset.np;if(n<0){np=null}else{np={sid:view,gi:n};tip=false;if(!KEY){lk=true;lockUI()}}drawer();return}
+ if(b.dataset.na!==undefined){addNote();return}
+ if(b.dataset.nx!==undefined){delNote(b.dataset.nx);return}
+ if(b.dataset.unlock!==undefined){doUnlock();return}
+ if(b.dataset.lkc!==undefined){lk=false;lockUI();return}
+ if(b.dataset.lkn!==undefined){lk=true;lockUI();return}
+ if(b.dataset.cs!==undefined){sendText();return}
+ if(b.dataset.fp!==undefined){if(!KEY){lk=true;lockUI();return}var fi_=document.getElementById(b.dataset.fp=="img"?"fimg":"fdoc");if(fi_)fi_.click();return}
+ if(b.dataset.dl!==undefined){dl(b);return}
+ if(b.dataset.bn!==undefined){try{Notification.requestPermission().then(function(){render();chatRender()})}catch(x){}return}
  if(b.dataset.gl!==undefined){if(!me)return;var gn=Math.max(1,Math.min(50,stats(me).goal+(+b.dataset.gl)));setP("progress/"+me+"/goal",gn);wr("progress/"+me+"/goal",gn);lastSig=sig();updLb();return}
  if(b.dataset.nd!==undefined){nudge(b.dataset.nd);return}
  if(b.dataset.pm!==undefined){pmo=b.dataset.pm=="1";prof();return}
  if(b.dataset.u!==undefined){var fs=!me;me=b.dataset.u;if(fs&&Object.keys(OLD).length&&!Object.keys(DONE[me]).length){var om={};Object.keys(OLD).forEach(function(k){om[k]=1;wr("progress/"+me+"/d/"+k,1)});DONE[me]=om;OLD={}}done=DONE[me];pmo=false;persist();lastSig=sig();render();beat();return}
  if(b.dataset.s!==undefined){so=b.dataset.s=="1";if(!so)q="";render();var qi=document.getElementById("q");if(qi)qi.focus();return}
- if(b.dataset.tip!==undefined){tip=b.dataset.tip=="1";drawer();return}
- if(b.dataset.v){view=b.dataset.v;flt="all";q="";so=false;render();document.querySelector("main").scrollTop=0;return}
+ if(b.dataset.tip!==undefined){tip=b.dataset.tip=="1";if(tip)np=null;drawer();return}
+ if(b.dataset.v){view=b.dataset.v;flt="all";q="";so=false;if(view=="chat"&&!KEY){lk=true;lockUI()}render();if(view!="chat")document.querySelector("main").scrollTop=0;return}
  if(b.dataset.f){flt=b.dataset.f;render();return}
  if(b.dataset.k){try{navigator.vibrate&&navigator.vibrate(8)}catch(x){}var k=b.dataset.k;mark(k,!done[k]);persist();lastSig=sig();if(flt=="all")quick(b);else render();return}
  if(b.dataset.g!==undefined){var s=D.filter(function(x){return x.id==view})[0],g=s.g[+b.dataset.g],all=g.n.every(function(n){return done[s.id+"-"+n]});g.n.forEach(function(n){var kk=s.id+"-"+n;if(all){if(done[kk])mark(kk,false)}else if(!done[kk])mark(kk,true)});persist();lastSig=sig();render()}
 });
-document.addEventListener("input",function(e){if(e.target.id=="q"){q=e.target.value;render()}});
+document.addEventListener("input",function(e){var i=e.target.id;if(i=="q"){q=e.target.value;render()}else if(i=="ci")cdraft=e.target.value;else if(i=="ni")ndraft=e.target.value});
+document.addEventListener("keydown",function(e){if(e.key!="Enter"||e.shiftKey)return;var i=e.target.id;if(i=="ci"){e.preventDefault();sendText()}else if(i=="pwi"){e.preventDefault();doUnlock()}});
+document.addEventListener("change",function(e){var i=e.target.id;if(i=="fimg"||i=="fdoc")sendFile(e.target)});
 function hint(){var a=document.getElementById("side"),h=document.getElementById("hint");if(!a||!h)return;h.classList.toggle("off",a.scrollWidth<=a.clientWidth+4||a.scrollLeft+a.clientWidth>=a.scrollWidth-8)}
 document.getElementById("side").addEventListener("scroll",hint);window.addEventListener("resize",hint);
 function pcAll(u){var a=0,c=0;D.forEach(function(s){a+=s.tot;c+=cnt(s,u)});return pc(c,a)}
@@ -331,8 +475,8 @@ function prof(){var e=document.getElementById("pf"),k=document.getElementById("p
  k.innerHTML="";var h='<button class="chip" data-pm="1">'+AV(me)+'<span>'+NM[me]+'</span></button>';
  if(pmo)h+='<div class="pov" data-pm="0"></div><div class="pop">'+["travis","hazel"].map(function(u){var p=pcAll(u);return'<button class="pi" data-u="'+u+'">'+AV(u)+'<span><b>'+NM[u]+(u==me?" (you)":"")+'</b><em>'+p+'% complete</em><span class="pb"><i style="width:'+p+'%"></i></span></span></button>'}).join("")+'<small class="syn">'+SY+'</small></div>';
  e.innerHTML=h}
-render();conn();beat();setInterval(beat,5000);setInterval(updLb,5000);
-document.addEventListener("visibilitychange",function(){if(!document.hidden){if(URL_&&(!es||es.readyState==2))conn();flush();beat()}});
+render();conn();beat();autoUnlock();setInterval(beat,5000);setInterval(updLb,5000);
+document.addEventListener("visibilitychange",function(){if(!document.hidden){if(URL_&&dead())conn();chatRender();flush();beat()}});
 window.addEventListener("online",function(){conn();flush()});
 </script>
 </body>
