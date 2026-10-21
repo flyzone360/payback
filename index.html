@@ -286,14 +286,14 @@ function GLV(u){if(!APP)return 0;var c=R.v2&&R.v2.g&&R.v2.g[u],o=c&&dcs(c,APP.a)
 function sig(){return["travis","hazel"].map(function(u){var n=0,s=0;for(var k in DONE[u]){n++;s+=+DONE[u][k]||0}return n+":"+s+":"+GLV(u)}).join("|")+"|"+nnotes()}
 function sched(){if(st)return;st=setTimeout(function(){st=0;apply();var g=sig();if(g!=lastSig){lastSig=g;render()}else{updLb();prof()}toast();chatTick();if(view=="chat")chatRender()},80)}
 /* ===== live streams: every path holds only encrypted values ===== */
-var ES={},GOT={},ST=[["v2",""],["chat","?orderBy=%22%24key%22&limitToLast=80"]];
+var ES={},GOT={},ST=[["v2",""],["c2","?orderBy=%22%24key%22&limitToLast=80"]];
 function live(){return ES["v2"]&&ES["v2"].readyState==1}
 function dead(){return!ES["v2"]||ES["v2"].readyState==2}
 function opn(p,qs){try{ES[p]&&ES[p].close()}catch(e){}
  var e=new EventSource(URL_+"/"+p+".json"+qs),mn=p=="v2";ES[p]=e;
  e.onopen=function(){if(mn){setSY(Object.keys(Q).length?"Syncing…":"Live");flush()}};
  e.addEventListener("put",function(ev){var m=JSON.parse(ev.data);
-  if(p=="chat"&&GOT[p]&&m.path=="/"&&!m.data){CH={};CHP={};KN={};BU={};showToast("Chat cleared")}
+  if(p=="c2"&&GOT[p]&&m.path=="/"&&!m.data){CH={};CHP={};KN={};BU={};showToast("Chat cleared")}
   setP("/"+p+(m.path=="/"?"":m.path),m.data);
   if(!GOT[p]){GOT[p]=1;if(mn){setSY("Live");migrate()}}sched()});
  e.addEventListener("patch",function(ev){var m=JSON.parse(ev.data),d=m.data||{},b="/"+p+(m.path=="/"?"":m.path);Object.keys(d).forEach(function(k){setP(b+"/"+k,d[k])});sched()});
@@ -332,7 +332,7 @@ async function tryPin(){pbusy=true;var m=document.getElementById("pgm");m.textCo
  if(r=="ok"){pin="";pgDots();m.textContent="";try{await startApp()}catch(e){}}
  else{var d=document.getElementById("pgd");d.classList.add("sk");setTimeout(function(){d.classList.remove("sk")},450);m.textContent=r=="bad"?"Wrong code":"Connect to the internet once to start";pin="";await new Promise(function(f){setTimeout(f,r=="bad"?700:200)});pgDots()}
  pbusy=false}
-async function startApp(){await prepIds();document.body.classList.remove("lockd");MIGD=false;render();conn();beat();autoUnlock()}
+async function startApp(){try{if(localStorage.getItem("cw_c4")!=URL_){CLEAN=CLEAN.concat(["chat","blobs","notes","n","meta"]);localStorage.setItem("cw_c4",URL_)}}catch(e){}setTimeout(runClean,3000);await prepIds();document.body.classList.remove("lockd");MIGD=false;render();conn();beat();autoUnlock()}
 function lockApp(){ST.forEach(function(x){try{ES[x[0]]&&ES[x[0]].close()}catch(e){}});ES={};GOT={};R={};DC={};DP={};APP=null;KEY=null;CSET=null;CH={};CHP={};ND={};NDP={};KN={};BU={};cinit=false;np=null;tip=false;lk=false;MIGD=false;pin="";pbusy=false;
  var dr=document.getElementById("dr");if(dr)dr.innerHTML="";lockUI();pgDots();document.getElementById("pgm").textContent="";document.body.classList.add("lockd")}
 document.addEventListener("keydown",function(e){if(!document.body.classList.contains("lockd"))return;if(/^[0-9]$/.test(e.key))kp(e.key);else if(e.key=="Backspace")kp("x")});
@@ -346,26 +346,18 @@ function fs(n){return n>1e6?(n/1e6).toFixed(1)+" MB":Math.max(1,Math.round(n/1e3
 function hm(t){try{return new Date(t).toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})}catch(e){return""}}
 function dl_(t){try{return new Date(t).toLocaleDateString([],{day:"numeric",month:"short"})}catch(e){return""}}
 async function prepNotes(){NID={};NIDR={};var jobs=[];D.forEach(function(s){s.g.forEach(function(g,gi){jobs.push(hid(CSET,"n:"+s.id+":"+gi).then(function(h){NID[s.id+":"+gi]=h;NIDR[h]=s.id+":"+gi}))})});await Promise.all(jobs)}
-async function migNotes(){try{var any=0;
- var r=await tf(URL_+"/notes.json");if(r.ok){var j=await r.json();if(j){Object.keys(j).forEach(function(sid){Object.keys(j[sid]||{}).forEach(function(c){var id=NID[sid+":"+c.slice(1)];if(!id)return;Object.keys(j[sid][c]||{}).forEach(function(k){wr("v2/n/"+id+"/"+k,j[sid][c][k])})})});CLEAN.push("notes")}}
- var r2=await tf(URL_+"/n.json");if(r2.ok){var j2=await r2.json();if(j2){Object.keys(j2).forEach(function(id){Object.keys(j2[id]||{}).forEach(function(k){wr("v2/n/"+id+"/"+k,j2[id][k])})});CLEAN.push("n")}}
- runClean()}catch(e){}}
 function runClean(){if(!CLEAN.length||Object.keys(Q).length)return;var cl=CLEAN;CLEAN=[];cl.forEach(function(p){fetch(URL_+"/"+p+".json",{method:"PUT",body:"null"}).catch(function(){})})}
-async function unlock(pw,silent){var set=null;try{set=await mkSet(pw,"payback-ssc-v1");KEY=set.a;CSET=set;
-  if(URL_){var r=await tf(URL_+"/meta/check.json");if(!r.ok)throw 1;var c=await r.json();
-   if(c){try{await dec(c)}catch(e){KEY=null;CSET=null;return"bad"}}
-   else{var v=await enc({ok:"payback"});var w=await tf(URL_+"/meta/check.json",{method:"PUT",body:JSON.stringify(v)});if(!w.ok)throw 1}}
-  await prepNotes();savePw(pw);if(URL_)migNotes();return"ok"}
- catch(e){if(silent&&set){KEY=set.a;CSET=set;try{await prepNotes()}catch(x){}return"ok"}KEY=null;CSET=null;return"err"}}
+var CC0="k8OZYDmXF4syoWQt.zSssE86jEZa/UrIr0OgBFNZmJaycEfRk";
+async function unlock(pw,silent){var set=null;try{set=await mkSet(pw,"payback-ssc-chat-v2");try{var o=await decK(set.a,CC0);if(!o||o.ok!=1)throw 1}catch(e){return"bad"}KEY=set.a;CSET=set;await prepNotes();savePw(pw);return"ok"}catch(e){KEY=null;CSET=null;return"err"}}
 function savePw(pw){if(!APP)return;encK(APP.a,{p:pw}).then(function(c){try{localStorage.setItem("cw_pw2",c);localStorage.removeItem("cw_pw")}catch(e){}})}
 function lockUI(){var e=document.getElementById("lk");if(!e)return;if(!lk){e.innerHTML="";return}
  e.innerHTML='<div class="ovl2"><div class="pkc"><h2>🔒 Chat password</h2><p>Chat and notes are end-to-end encrypted. Type the chat password you both agreed on. It is saved on this device only in encrypted form.</p><input class="search" id="pwi" type="password" autocomplete="off" placeholder="Chat password" style="width:100%;margin-bottom:10px"><div id="pwe" style="color:#ff375f;font-size:13px;min-height:20px;margin-bottom:8px"></div><div class="pkr"><button class="pkb" data-lkc="1" style="padding:12px 8px">Cancel</button><button class="pkb" data-unlock="1" style="padding:12px 8px;background:var(--blue);color:#fff;border:0">Unlock</button></div></div></div>';
  setTimeout(function(){var i=document.getElementById("pwi");if(i)i.focus()},50)}
-async function doUnlock(){var i=document.getElementById("pwi"),er=document.getElementById("pwe");if(!i)return;var pw=i.value;
+async function doUnlock(){var i=document.getElementById("pwi"),er=document.getElementById("pwe");if(!i)return;var pw=i.value.trim().toLowerCase();
  if(!pw){er.textContent="Type the password";return}
  if(!window.crypto||!crypto.subtle){er.textContent="Encryption needs https (works on GitHub Pages)";return}
  er.textContent="Checking…";var r=await unlock(pw,false);
- if(r=="ok"){lk=false;lockUI();CH={};ND={};chatSoon();nlist();render()}else er.textContent=r=="bad"?"Wrong password":"Could not reach the database"}
+ if(r=="ok"){lk=false;lockUI();CH={};ND={};chatSoon();nlist();render()}else er.textContent=r=="bad"?"Wrong password":"Something went wrong, try again"}
 function autoUnlock(){var c=null,old=null;try{c=localStorage.getItem("cw_pw2");old=localStorage.getItem("cw_pw")}catch(e){}if(!window.crypto||!crypto.subtle)return;
  (async function(){var pw=old;if(!pw&&c&&APP){try{pw=(await decK(APP.a,c)).p}catch(e){}}if(!pw)return;var r=await unlock(pw,true);
   if(r=="ok"){CH={};ND={};chatSoon();nlist();render()}else if(r=="bad"){try{localStorage.removeItem("cw_pw2");localStorage.removeItem("cw_pw")}catch(e){}}})()}
@@ -376,18 +368,18 @@ function notify(t,b){try{if(!document.hidden||!("Notification" in window)||Notif
 /* ===== chat ===== */
 function CSn(){try{return+localStorage.getItem("cw_cs_"+me)||0}catch(e){return 0}}
 function mt(k,v){return tk(k)||(v&&v.t)||0}
-function unread(){var n=0,c=R.chat||{},s=CSn();for(var k in c){var v=c[k],o=CH[k],f=(o&&o.f)||(v&&v.f);if(mt(k,v)>s&&f!=me)n++}return n}
+function unread(){var n=0,c=R.c2||{},s=CSn();for(var k in c){var v=c[k],o=CH[k],f=(o&&o.f)||(v&&v.f);if(mt(k,v)>s&&f!=me)n++}return n}
 function badge(){var u=unread();if(u!=lastU){lastU=u;side();prof();document.title=(u?"("+u+") ":"")+"Payback SSC"}}
-function seenNow(){if(view!="chat"||document.hidden)return;var m=0,c=R.chat||{};for(var k in c){var t=mt(k,c[k]);if(t>m)m=t}if(m>CSn()){try{localStorage.setItem("cw_cs_"+me,m)}catch(e){}}badge()}
+function seenNow(){if(view!="chat"||document.hidden)return;var m=0,c=R.c2||{};for(var k in c){var t=mt(k,c[k]);if(t>m)m=t}if(m>CSn()){try{localStorage.setItem("cw_cs_"+me,m)}catch(e){}}badge()}
 function chatSoon(){clearTimeout(crt);crt=setTimeout(chatRender,40)}
 function ensure(k,v){if(CH[k]||CHP[k]||!KEY)return;CHP[k]=1;dec(v.c).then(function(o){CH[k]=o}).catch(function(){CH[k]={e:1}}).then(function(){delete CHP[k];chatSoon();badge()})}
 function chatRender(){var el=document.getElementById("cl");if(!el||view!="chat")return;
  var hd=document.getElementById("cs0");if(hd)hd.innerHTML=(URL_?"🔒 End-to-end encrypted. Firebase only sees scrambled text.":"⚠️ Database not connected.")+nbtn()+' <button class="tipb dng" data-cc="1">🗑 Clear chat</button>';
  if(!KEY){el.innerHTML='<div class="empty">🔒 Locked<br><button class="tipb" data-lkn="1" style="margin:14px 0 0">Enter password</button></div>';return}
  var mn=document.querySelector("main"),near=!el.dataset.r||mn.scrollHeight-mn.scrollTop-mn.clientHeight<160;
- var items=Object.keys(R.chat||{}).sort(),h="",last="";
+ var items=Object.keys(R.c2||{}).sort(),h="",last="";
  if(!items.length)h='<div class="empty">No messages yet. Say hi 👋</div>';
- items.forEach(function(k){var v=R.chat[k];if(!v||!v.c)return;ensure(k,v);var o=CH[k],snd=(o&&o.f)||v.f,mine=snd==me,t=mt(k,v),day=dl_(t);
+ items.forEach(function(k){var v=R.c2[k];if(!v||!v.c)return;ensure(k,v);var o=CH[k],snd=(o&&o.f)||v.f,mine=snd==me,t=mt(k,v),day=dl_(t);
   if(day!=last){last=day;h+='<div class="dsp">'+esc(day)+'</div>'}
   var body="";
   if(!o)body='<i class="ld">…</i>';
@@ -402,10 +394,10 @@ function chatRender(){var el=document.getElementById("cl");if(!el||view!="chat")
 function loadImg(im){var id=im.dataset.b;im.onload=function(){if(stick){var m=document.querySelector("main");m.scrollTop=m.scrollHeight}};
  if(BU[id]){im.src=BU[id];return}if(BP[id])return;BP[id]=1;
  getBlob(id,"image/jpeg").then(function(u){BU[id]=u;delete BP[id];document.querySelectorAll('img[data-b="'+id+'"]').forEach(function(i){i.src=u})}).catch(function(){delete BP[id]})}
-async function getBlob(id,mime){var r=await fetch(URL_+"/blobs/"+id+".json");if(!r.ok)throw 0;var s=await r.json();if(!s)throw 0;var u8=await decB(s);return URL.createObjectURL(new Blob([u8],{type:mime||"application/octet-stream"}))}
+async function getBlob(id,mime){var r=await fetch(URL_+"/b2/"+id+".json");if(!r.ok)throw 0;var s=await r.json();if(!s)throw 0;var u8=await decB(s);return URL.createObjectURL(new Blob([u8],{type:mime||"application/octet-stream"}))}
 function dl(b){getBlob(b.dataset.dl,b.dataset.m).then(function(u){var a=document.createElement("a");a.href=u;a.download=b.dataset.n||"file";document.body.appendChild(a);a.click();a.remove()}).catch(function(){showToast("Could not download")})}
 function shrink(file,max,q){return new Promise(function(res,rej){var u=URL.createObjectURL(file),im=new Image();im.onload=function(){var r=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*r);c.height=Math.round(im.height*r);c.getContext("2d").drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);c.toBlob(function(b){b?res(b):rej()},"image/jpeg",q)};im.onerror=rej;im.src=u})}
-async function postMsg(o){var k=mkKey(),o2={f:me,t:Date.now()};for(var x in o)o2[x]=o[x];var v={c:await enc(o2)};R.chat=R.chat||{};R.chat[k]=v;CH[k]=o2;KN[k]=1;try{localStorage.setItem("cw_cs_"+me,o2.t)}catch(e){}wr("chat/"+k,v);chatRender()}
+async function postMsg(o){var k=mkKey(),o2={f:me,t:Date.now()};for(var x in o)o2[x]=o[x];var v={c:await enc(o2)};R.c2=R.c2||{};R.c2[k]=v;CH[k]=o2;KN[k]=1;try{localStorage.setItem("cw_cs_"+me,o2.t)}catch(e){}wr("c2/"+k,v);chatRender()}
 async function sendText(){var i=document.getElementById("ci");if(!i)return;var t=i.value.trim();if(!t)return;
  if(!URL_){showToast("Database not connected");return}if(!KEY){lk=true;lockUI();return}
  i.value="";cdraft="";try{await postMsg({x:t})}catch(e){showToast("Could not send")}}
@@ -414,13 +406,13 @@ async function sendFile(t){var f=t.files&&t.files[0];t.value="";if(!f)return;
  try{showToast("Encrypting and sending…");var img=t.id=="fimg",bytes,mime=f.type||"application/octet-stream";
   if(img){var bl=await shrink(f,1000,.65);if(bl.size>350e3)bl=await shrink(f,760,.5);bytes=new Uint8Array(await bl.arrayBuffer());mime="image/jpeg"}
   else{if(f.size>900e3){showToast("Document too big. Max about 900 KB");return}bytes=new Uint8Array(await f.arrayBuffer())}
-  var id=mkKey()+"b",r=await fetch(URL_+"/blobs/"+id+".json",{method:"PUT",body:JSON.stringify(await encB(bytes))});if(!r.ok)throw 1;
+  var id=mkKey()+"b",r=await fetch(URL_+"/b2/"+id+".json",{method:"PUT",body:JSON.stringify(await encB(bytes))});if(!r.ok)throw 1;
   await postMsg({ty:img?"img":"doc",b:id,n:f.name,m:mime,sz:bytes.length,x:""});showToast("Sent ✓")}
  catch(e){showToast("Could not send. Check internet")}}
 async function clearChat(){if(!URL_)return;if(!confirm("Clear the whole chat for BOTH of you? This cannot be undone."))return;
- try{var rs=await Promise.all([fetch(URL_+"/chat.json",{method:"PUT",body:"null"}),fetch(URL_+"/blobs.json",{method:"PUT",body:"null"})]);if(!rs[0].ok||!rs[1].ok)throw 1}catch(e){showToast("Could not clear. Check internet");return}
- Object.keys(Q).forEach(function(k){if(k.indexOf("chat/")==0)delete Q[k]});pq();R.chat={};CH={};CHP={};KN={};BU={};showToast("Chat cleared");chatRender();badge()}
-function chatTick(){if(!GOT.chat)return;var c=R.chat||{},ks=Object.keys(c);
+ try{var rs=await Promise.all([fetch(URL_+"/c2.json",{method:"PUT",body:"null"}),fetch(URL_+"/b2.json",{method:"PUT",body:"null"})]);if(!rs[0].ok||!rs[1].ok)throw 1}catch(e){showToast("Could not clear. Check internet");return}
+ Object.keys(Q).forEach(function(k){if(k.indexOf("c2/")==0)delete Q[k]});pq();R.c2={};CH={};CHP={};KN={};BU={};showToast("Chat cleared");chatRender();badge()}
+function chatTick(){if(!GOT.c2)return;var c=R.c2||{},ks=Object.keys(c);
  if(!cinit){ks.forEach(function(k){KN[k]=1});cinit=true}
  else ks.forEach(function(k){if(KN[k])return;KN[k]=1;var v=c[k];if(!v||!KEY)return;
   var f=function(o){var snd=(o&&o.f)||v.f;if(!o||o.e||snd==me)return;if(view=="chat"&&!document.hidden)return;
