@@ -136,14 +136,43 @@ h1{font-size:26px}.sub{font-size:14px}
 .pkr{display:flex;gap:12px}.pkb{flex:1;border:1px solid var(--line);background:var(--bg);color:var(--t);border-radius:22px;padding:20px 8px;font:inherit;cursor:pointer;transition:transform .15s}.pkb:active{transform:scale(.96)}
 .pkb .av{width:56px;height:56px;font-size:24px;margin:0 auto 10px}.pkb b{display:block;font-size:16px}.pkb small{color:var(--t2);font-size:12px}
 main{padding-top:68px}
+
+/* ===== smooth + new features ===== */
+html{scroll-behavior:auto}
+aside,.grp,.oc,.it,.search,.seg,.tools,.chip,.pane,.pop,.ovl,.ovl2,.pkc,.tipb{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+aside{background:color-mix(in srgb,var(--card) 94%,transparent)}
+.grp,.oc{background:var(--card);box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.grp{content-visibility:auto;contain-intrinsic-size:auto 280px}
+.it{background:var(--card);transition:background-color .12s;contain:layout style}
+.it.d{background:color-mix(in srgb,var(--c) 10%,var(--card))}
+.chip,.pane,.pop{background:var(--card)}
+.ovl{background:rgba(0,0,0,.35)}.ovl2{background:rgba(0,0,0,.4)}
+.av{background:none!important;overflow:hidden;padding:0}.av svg{width:100%;height:100%;display:block}
+#main>.lbx,#main>.sw,#main>.bn{grid-column:1/-1}
+.lbx{margin-top:18px;padding:18px 20px;border-radius:22px;background:var(--card);border:1px solid var(--line)}
+.lbh{font-size:17px;font-weight:600;letter-spacing:-.02em;margin-bottom:12px}
+.lbr{display:flex;gap:12px;align-items:center;margin:10px 0}
+.avw{position:relative;width:46px;height:46px;flex:none}.avw .av{width:46px;height:46px}
+.dot{position:absolute;right:0;bottom:0;width:13px;height:13px;border-radius:50%;background:#8e8e93;border:2px solid var(--card)}.dot.on{background:#30d158}
+.lbm{flex:1;min-width:0}.lbt{display:flex;justify-content:space-between;font-size:15px}.lbt span{font-weight:700;font-variant-numeric:tabular-nums}
+.lbm em{display:block;font-style:normal;font-size:12px;color:var(--t2);margin-top:5px}
+.lbm .pb{height:8px;margin-top:6px}
+.wk{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin:16px 0 4px}.wc{text-align:center}
+.wb{height:54px;display:flex;align-items:flex-end;justify-content:center;gap:3px}.wb i{display:block;width:8px;border-radius:4px;min-height:3px;transition:height .3s}
+.wc small{font-size:11px;color:var(--t2)}
+.wl{font-size:12px;color:var(--t2);margin-top:4px}
+.lbf{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px;font-size:13px;color:var(--t2)}.lbf b{color:var(--t)}.lbf .tipb{margin:0}
+.bn{margin-top:14px;padding:12px 14px;border-radius:14px;background:rgba(255,159,10,.15);font-size:13px;line-height:1.5}
+.sw{margin:10px 0 0;font-size:14px;font-weight:500}
+#tt{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top,0px));transform:translate(-50%,-160%);z-index:30;background:var(--t);color:var(--bg);padding:10px 16px;border-radius:16px;font-size:14px;font-weight:500;transition:transform .3s cubic-bezier(.2,.9,.3,1.2);max-width:90%;pointer-events:none}#tt.on{transform:translate(-50%,0)}
 </style>
 </head>
 <body>
-<aside id="side"></aside><div id="hint" class="hint"><span>›</span></div><div id="pf"></div><div id="pk"></div><div id="dr"></div>
+<aside id="side"></aside><div id="hint" class="hint"><span>›</span></div><div id="pf"></div><div id="pk"></div><div id="dr"></div><div id="tt"></div>
 <main><div class="wrap" id="main"></div></main>
 <script>
 /* PASTE YOUR FIREBASE REALTIME DATABASE URL BETWEEN THE QUOTES, e.g. "https://your-project-default-rtdb.firebaseio.com" */
-var DB_URL="";
+var DB_URL="https://payback-d4ed4-default-rtdb.asia-southeast1.firebasedatabase.app";
 var D=[
 {id:"reas",name:"Reasoning",e:"🧠",c:"#af52de",s:"1:Introduction;2-6:Counting Figures;7-13:Blood Relation;14-18:Directions and Distance;19:Directions PYQ Practice;20-26:Non-Verbal;27-33:Coding Decoding;34:Coding Decoding PYQ Practice;35-37:Letter Series;38-39:Pair Formation;40:Word Formation, Jumbling, Dictionary;41:Matrix;42-46:Alphabetical Series;47-49:Inequality;50-51:Arithmetic Reasoning;52-54:Number Series;55-56:Missing Number;57-58:Analogy;59-60:Classification - Odd One Out;61-62:Coded Equations;63-70:Calendar;71-81:Analytical Reasoning;82-87:Clock;88:Clock PYQs Practice;89-93:Ranking;94-101:Syllogism;102:Dice;103-106:Sitting Arrangements;107:Sitting Arrangements PYQs;108-113:Puzzle;114-117:Machine Input;118-121:Dice;122:Dice PYQs Practice;123-126:Cube and Cuboid;127:Cube and Cuboid PYQs;128-129:Venn Diagram;130:Sitting, Puzzle, Machine;131:Last Class;132:Extra - Address Matching;133:Extra - Arithmetic Reasoning New Pattern"},
 {id:"hist",name:"History",e:"🏛️",c:"#ff9f0a",s:"1:Introduction;2:Islam;3:Turkish Invasion in India;4-5:Slave Dynasty;6-10:Khilji Dynasty;11-12:Tughlaq Dynasty;13-21:Independent States of Medieval India;22-23:Sources of History;24:Pre Historic Period;25-46:Independent States of Medieval India;47-48:Gupta Empire;49:Gupta Empire MCQ;50:Gupta Empire;51-52:Post Gupta Period;53:Sangam Period;54:Chola State;55-56:South Indian Dynasties;57-59:Advent of Europeans in India;60-65:Decline of Mughal Empire;66-69:Maratha Empire;70:Indian National Congress;71:Maratha Empire;72-76:Governors, Gov. General, Viceroys;77:Socio-Religious Reform Movement"},
@@ -174,16 +203,80 @@ eco:["First understand the concepts (demand, supply, money, inflation). Memorisi
 eng:["Learn 10 new words daily and revise them. Use the Vocab classes as flashcards.","Read one newspaper editorial for 15 minutes every day.","After each grammar topic (Tense, Modals, Preposition and so on) solve its practice set immediately.","Idioms and One Word Substitutions: learn 10 a day and revise weekly.","Practise Cloze Test and Para-jumbles daily. Both can be scored with practice.","Reading comprehension: read the questions first, then the passage."]};
 function drawer(){var e=document.getElementById("dr");if(!tip){e.innerHTML="";return}var T=0,C=0;D.forEach(function(s){T+=s.tot;C+=cnt(s)});var left=T-C,s=D.filter(function(x){return x.id==view})[0];var li=function(a){return"<ul>"+a.map(function(x){return"<li>"+x+"</li>"}).join("")+"</ul>"};var h='<div class="ovl" data-tip="0"></div><div class="pane"><div class="ph"><b>💡 Tips and Study Plan</b><button class="all" data-tip="0">Close</button></div><h3>Your pace</h3><p>'+left+' lectures left ('+C+' of '+T+' done). At 3 lectures a day you finish in about '+Math.ceil(left/3)+' days, at 5 a day in about '+Math.ceil(left/5)+' days.</p>';if(s)h+='<h3>'+s.e+' '+s.name+' tips</h3>'+li(TIPS[s.id]);h+='<h3>What aspirants commonly advise</h3><p>General advice repeated by aspirants on Reddit, YouTube and coaching blogs, plus my own knowledge. These are common patterns, not exact quotes.</p>'+li(TIPS.real)+'<h3>Beginner roadmap</h3>'+li(TIPS.road)+'<h3>SSC exam at a glance</h3>'+li(TIPS.exam)+'<h3>Mistakes to avoid</h3>'+li(TIPS.mist);e.innerHTML=h+'</div>'}
 var done={},view="all",flt="all",q="";
-var DONE={travis:{},hazel:{}},me=null,T={travis:0,hazel:0};
-try{var o=JSON.parse(localStorage.getItem("cw_P")||"null");if(o){DONE=o.D;T=o.T}else{OLD=JSON.parse(localStorage.getItem("cw_done")||"{}")}me=localStorage.getItem("cw_me")}catch(e){}
+var URL_=(DB_URL||"").replace(/\/+$/,"");
+var DONE={travis:{},hazel:{}},me=null,OLD={},R={},Q={},got=false,es=null,fi=false,ft=null,rt=null,st=0,lastSig="";
+var NM={travis:"Travis",hazel:"Hazel"},pmo=false,SY=URL_?"Connecting…":"Saved on this device";
+try{var o=JSON.parse(localStorage.getItem("cw_P")||"null");if(o&&o.D){DONE={travis:o.D.travis||{},hazel:o.D.hazel||{}}}else{OLD=JSON.parse(localStorage.getItem("cw_done")||"{}")}me=localStorage.getItem("cw_me");Q=JSON.parse(localStorage.getItem("cw_Q")||"{}")}catch(e){}
 if(me!="travis"&&me!="hazel")me=null;
 done=me?DONE[me]:{};
-var SY="Saved on this device",PD={},tm=null,OLD={},NM={travis:"Travis",hazel:"Hazel"},pmo=false;
-function persist(){try{localStorage.setItem("cw_P",JSON.stringify({D:DONE,T:T}));if(me)localStorage.setItem("cw_me",me)}catch(e){}}
-function save(){if(!me)return;T[me]=Date.now();persist();var u=me,t=T[u];if(PD[u]){clearTimeout(tm);tm=setTimeout(function(){PD[u].set({d:DONE[u],t:t}).then(function(){SY="Synced online";prof()}).catch(function(){SY="Sync failed, saved on device";prof()})},700)}}
-async function pull(skip){for(var u of ["travis","hazel"]){if(u==skip||!PD[u])continue;try{var s=await PD[u].get();if(s.exists){var r=s.data();if((r.t||0)>T[u]){DONE[u]=r.d||{};T[u]=r.t||0}else if(T[u]>(r.t||0)){PD[u].set({d:DONE[u],t:T[u]})}}else if(Object.keys(DONE[u]).length){PD[u].set({d:DONE[u],t:T[u]||Date.now()})}}catch(e){}}if(me)done=DONE[me];persist();render()}
-function rest(u){var x=DB_URL.replace(/\/$/,"")+"/progress/"+u+".json";return{get:async function(){var r=await fetch(x);if(!r.ok)throw 0;var j=await r.json();return{exists:!!j,data:function(){return j}}},set:async function(o){var r=await fetch(x,{method:"PUT",body:JSON.stringify(o)});if(!r.ok)throw 0}}}
-(async function(){try{if(DB_URL){PD.travis=rest("travis");PD.hazel=rest("hazel")}else{if(!window.claude)return;var db=await claude.use("db");if(!db)return;PD.travis=db.doc("progress/travis");PD.hazel=db.doc("progress/hazel")}await pull();SY="Synced online";render()}catch(e){SY="Sync failed, saved on device";render()}})();
+var SVG={travis:'<svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="32" fill="#bfdcff"/><path d="M12 64c2-14 12-20 20-20s18 6 20 20z" fill="#0a84ff"/><rect x="27" y="36" width="10" height="10" rx="4" fill="#f1c7a0"/><circle cx="32" cy="27" r="12" fill="#f8d5b5"/><path d="M20 27c0-10 7-15 13-15s11 5 11 13c-3-4-8-6-12-5-5 0-9 3-12 7z" fill="#2b2118"/><circle cx="27.5" cy="28.5" r="1.5" fill="#2b2118"/><circle cx="36.5" cy="28.5" r="1.5" fill="#2b2118"/><path d="M28 33.5q4 3 8 0" stroke="#2b2118" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>',
+hazel:'<svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="32" fill="#ffd0dc"/><path d="M16 24c0-12 8-18 16-18s16 6 16 18v20c0 4-4 6-8 4H24c-4 2-8 0-8-4z" fill="#4a2c20"/><path d="M12 64c2-14 12-20 20-20s18 6 20 20z" fill="#ff375f"/><rect x="27" y="36" width="10" height="10" rx="4" fill="#f1c7a0"/><circle cx="32" cy="27" r="12" fill="#f8d5b5"/><path d="M20 27c0-9 5-14 12-14s12 5 12 14c-3-5-7-7-12-7s-9 2-12 7z" fill="#4a2c20"/><circle cx="27.5" cy="29" r="1.5" fill="#2b2118"/><circle cx="36.5" cy="29" r="1.5" fill="#2b2118"/><path d="M28 34q4 3 8 0" stroke="#c2415f" stroke-width="1.6" fill="none" stroke-linecap="round"/><circle cx="46" cy="14" r="4.5" fill="#ff375f"/><circle cx="46" cy="14" r="1.6" fill="#fff"/></svg>'};
+function AV(u){return'<i class="av '+u+'">'+SVG[u]+'</i>'}
+function persist(){try{localStorage.setItem("cw_P",JSON.stringify({D:DONE}));if(me)localStorage.setItem("cw_me",me)}catch(e){}}
+function pq(){try{localStorage.setItem("cw_Q",JSON.stringify(Q))}catch(e){}}
+function setSY(t){SY=t;var e=document.querySelector(".brand span");if(e)e.textContent=t}
+function other(){return me=="hazel"?"travis":"hazel"}
+/* ---- write queue: every change goes to the DB as a tiny multi-path PATCH ---- */
+function wr(path,val){Q[path]=val;pq();if(URL_){clearTimeout(ft);ft=setTimeout(flush,250)}}
+async function flush(){if(!URL_||fi)return;var ks=Object.keys(Q);if(!ks.length)return;var snap={};ks.forEach(function(k){snap[k]=Q[k]});fi=true;var ok=false;
+ try{var r=await fetch(URL_+"/.json",{method:"PATCH",body:JSON.stringify(snap),keepalive:true});if(!r.ok)throw 0;ks.forEach(function(k){if(Q[k]===snap[k])delete Q[k]});pq();setSY(es&&es.readyState==1?"Live":"Connecting…");ok=true}
+ catch(e){setSY("Offline, will sync")}
+ fi=false;if(Object.keys(Q).length){clearTimeout(ft);ft=setTimeout(flush,ok?300:3000)}}
+function mark(k,on){var p="progress/"+me+"/d/"+k;if(on){done[k]=Date.now();wr(p,done[k])}else{delete done[k];wr(p,null)}}
+/* ---- live stream (Firebase Realtime DB server-sent events, instant, tiny bandwidth) ---- */
+function setP(path,val,merge){var p=path.split("/").filter(Boolean);
+ if(!p.length){if(merge){Object.keys(val||{}).forEach(function(k){if(val[k]===null)delete R[k];else R[k]=val[k]})}else R=(val&&typeof val=="object")?val:{};return}
+ var o=R;for(var i=0;i<p.length-1;i++){if(typeof o[p[i]]!="object"||o[p[i]]===null)o[p[i]]={};o=o[p[i]]}
+ var l=p[p.length-1];if(val===null||val===undefined)delete o[l];else o[l]=val}
+function migrate(){try{if(localStorage.getItem("cw_mig")==URL_)return;localStorage.setItem("cw_mig",URL_)}catch(e){return}
+ ["travis","hazel"].forEach(function(u){var rd=(R.progress&&R.progress[u]&&R.progress[u].d)||{};Object.keys(DONE[u]).forEach(function(k){if(!rd[k])wr("progress/"+u+"/d/"+k,DONE[u][k])})})}
+function apply(){var pr=R.progress||{};["travis","hazel"].forEach(function(u){var d={},rd=(pr[u]&&pr[u].d)||{};Object.keys(rd).forEach(function(k){d[k]=rd[k]});var pf="progress/"+u+"/d/";Object.keys(Q).forEach(function(k){if(k.indexOf(pf)==0){var kk=k.slice(pf.length);if(Q[k]===null)delete d[kk];else d[kk]=Q[k]}});DONE[u]=d});done=me?DONE[me]:{};persist()}
+function sig(){var g=function(u){return(R.progress&&R.progress[u]&&R.progress[u].goal)||""};return["travis","hazel"].map(function(u){var n=0,s=0;for(var k in DONE[u]){n++;s+=+DONE[u][k]||0}return n+":"+s+":"+g(u)}).join("|")}
+function sched(){if(st)return;st=setTimeout(function(){st=0;apply();var g=sig();if(g!=lastSig){lastSig=g;render()}else{updLb();prof()}toast()},80)}
+function conn(){if(!URL_)return;try{es&&es.close()}catch(e){}clearTimeout(rt);
+ es=new EventSource(URL_+"/.json");
+ es.onopen=function(){setSY(Object.keys(Q).length?"Syncing…":"Live");flush()};
+ es.addEventListener("put",function(e){var m=JSON.parse(e.data);setP(m.path,m.data);if(!got){got=true;migrate();setSY("Live")}sched()});
+ es.addEventListener("patch",function(e){var m=JSON.parse(e.data),d=m.data||{},b=m.path=="/"?"":m.path;Object.keys(d).forEach(function(k){setP(b+"/"+k,d[k])});sched()});
+ var bad=function(){try{es.close()}catch(x){}setSY("Reconnecting…");clearTimeout(rt);rt=setTimeout(conn,3000)};
+ es.addEventListener("cancel",bad);es.addEventListener("auth_revoked",bad);
+ es.onerror=function(){setSY("Reconnecting…");if(es.readyState==2){clearTimeout(rt);rt=setTimeout(conn,3000)}}}
+function beat(){if(!URL_||!me||document.hidden)return;fetch(URL_+"/presence/"+me+".json",{method:"PUT",body:JSON.stringify(Date.now()),keepalive:true}).catch(function(){})}
+function on(u){var t=R.presence&&R.presence[u];return!!t&&Math.abs(Date.now()-t)<15000}
+/* ---- stats ---- */
+function dk(t){var d=new Date(t);return d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate()}
+function back(n){var d=new Date();d.setDate(d.getDate()-n);return dk(d.getTime())}
+function stats(u){var c={};for(var k in DONE[u]){var t=+DONE[u][k];if(t>1e12){var x=dk(t);c[x]=(c[x]||0)+1}}
+ var today=c[back(0)]||0,i=today?0:1,sk=0;while(c[back(i)]){sk++;i++}
+ var w=[],wk=0;for(var j=6;j>=0;j--){var v=c[back(j)]||0;w.push(v);wk+=v}
+ var gl=(R.progress&&R.progress[u]&&+R.progress[u].goal)||3;return{today:today,st:sk,w:w,wk:wk,goal:gl}}
+function pct1(a,b){return b?a/b*100:0}
+function lb(){var T=0,A={travis:0,hazel:0};D.forEach(function(s){T+=s.tot;A.travis+=cnt(s,"travis");A.hazel+=cnt(s,"hazel")});
+ var pt=pct1(A.travis,T),ph=pct1(A.hazel,T),diff=Math.abs(pt-ph),dl=Math.abs(A.travis-A.hazel),w=pt>ph?"travis":"hazel";
+ var h='<div class="lbh">'+(dl==0?"🤝 Dead heat, both at "+pt.toFixed(1)+"%":"🏆 "+NM[w]+" is winning by "+diff.toFixed(1)+"% ("+dl+" lecture"+(dl>1?"s":"")+" ahead)")+'</div>';
+ var S={travis:stats("travis"),hazel:stats("hazel")},col={travis:"#0a84ff",hazel:"#ff375f"};
+ ["travis","hazel"].forEach(function(u){var p=pct1(A[u],T);h+='<div class="lbr"><div class="avw">'+AV(u)+'<b class="dot'+(on(u)?" on":"")+'"></b></div><div class="lbm"><div class="lbt"><b>'+NM[u]+(u==w&&dl?" 👑":"")+'</b><span>'+p.toFixed(1)+'%</span></div><span class="pb"><i style="width:'+p+'%;background:'+col[u]+'"></i></span><em>'+A[u]+'/'+T+' · 🔥 '+S[u].st+' day streak · today '+S[u].today+'/'+S[u].goal+(on(u)?' · online now':'')+'</em></div></div>'});
+ var mx=1;S.travis.w.concat(S.hazel.w).forEach(function(v){if(v>mx)mx=v});
+ h+='<div class="wk">';for(var j=0;j<7;j++){var dd=new Date();dd.setDate(dd.getDate()-(6-j));h+='<div class="wc"><div class="wb"><i style="height:'+(S.travis.w[j]/mx*100)+'%;background:#0a84ff"></i><i style="height:'+(S.hazel.w[j]/mx*100)+'%;background:#ff375f"></i></div><small>'+"SMTWTFS".charAt(dd.getDay())+'</small></div>'}
+ h+='</div><div class="wl">Last 7 days: Travis '+S.travis.wk+' · Hazel '+S.hazel.wk+' lectures</div>';
+ if(me)h+='<div class="lbf"><span>My daily goal <b>'+S[me].goal+'</b></span><button class="ib" data-gl="-1">−</button><button class="ib" data-gl="1">+</button>'+(URL_?'<button class="tipb" data-nd="👏 Keep going!">👏 Cheer '+NM[other()]+'</button><button class="tipb" data-nd="⏰ Time to study!">⏰ Nudge</button>':'')+'</div>';
+ return h}
+function updLb(){var e=document.getElementById("lb");if(e&&view=="all")e.innerHTML=lb()}
+function sw(s){var a=pc(cnt(s,"travis"),s.tot),b=pc(cnt(s,"hazel"),s.tot);return"Travis "+a+"% · Hazel "+b+"%"+(a==b?"":" · 👑 "+(a>b?"Travis":"Hazel"))}
+function swl(s){var a=cnt(s,"travis"),b=cnt(s,"hazel"),pa=pct1(a,s.tot),pb=pct1(b,s.tot);if(a==b)return"🤝 Tied here at "+pa.toFixed(0)+"%";var w=a>b?"travis":"hazel";return"🏆 "+NM[w]+" leads this subject by "+Math.abs(pa-pb).toFixed(1)+"% ("+Math.abs(a-b)+" lectures)"}
+function bn(){return URL_?"":'<div class="bn">⚠️ Database not connected. Progress is saved only on this device. Set <b>DB_URL</b> at the top of the script to turn on live sync.</div>'}
+var tmo=null;function showToast(t){var e=document.getElementById("tt");if(!e)return;e.textContent=t;e.classList.add("on");clearTimeout(tmo);tmo=setTimeout(function(){e.classList.remove("on")},4500)}
+function nudge(m){if(!URL_||!me)return;var o=other(),v={f:me,t:Date.now(),m:m};R.nudge=R.nudge||{};R.nudge[o]=v;fetch(URL_+"/nudge/"+o+".json",{method:"PUT",body:JSON.stringify(v)}).catch(function(){});showToast("Sent to "+NM[o]+": "+m)}
+function toast(){try{if(!me||!R.nudge)return;var n=R.nudge[me];if(!n||!n.t||n.f==me)return;var seen=+localStorage.getItem("cw_nt")||0;if(n.t>seen){localStorage.setItem("cw_nt",n.t);if(Date.now()-n.t<36e5)showToast((NM[n.f]||"")+": "+String(n.m).slice(0,80))}}catch(e){}}
+/* ---- fast path for a single tap: touch only what changed, no full re-render ---- */
+function quick(b){var s=D.filter(function(x){return x.id==view})[0];if(!s)return;b.classList.toggle("d",!!done[b.dataset.k]);
+ var grp=b.closest(".grp"),a=grp.querySelector(".all"),g=s.g[+a.dataset.g],gd=g.n.filter(function(n){return done[s.id+"-"+n]}).length;
+ grp.querySelector(".gh span").textContent=gd+"/"+g.n.length;a.textContent=gd==g.n.length?"Unmark all":"Mark all done";
+ var c=cnt(s),p=pc(c,s.tot),sub=document.querySelector("#main>.sub");if(sub)sub.textContent=s.tot+" lectures · "+c+" done · "+(s.tot-c)+" left ("+p+"%)";
+ var bi=document.querySelector("#main>.bar i");if(bi)bi.style.width=p+"%";
+ var sv=document.getElementById("sw");if(sv)sv.textContent=swl(s);
+ var T=0,C=0;D.forEach(function(x){T+=x.tot;C+=cnt(x)});
+ document.querySelectorAll("#side .nav[data-v]").forEach(function(n){var sm=n.querySelector("small");if(!sm)return;var v=n.dataset.v;if(v=="all")sm.textContent=C+"/"+T;else{var x=D.filter(function(y){return y.id==v})[0];sm.textContent=cnt(x)+"/"+x.tot}})}
 function cnt(s,u){var m=u?DONE[u]:done,c=0;s.g.forEach(function(g){g.n.forEach(function(n){if(m[s.id+"-"+n])c++})});return c}
 function pc(a,b){return b?Math.round(a/b*100):0}
 function side(){
@@ -196,13 +289,13 @@ function main(){
  var m=document.getElementById("main"),h="";
  if(view=="all"){
   var T=0,C=0;D.forEach(function(s){T+=s.tot;C+=cnt(s)});
-  h+='<h1>Your Progress</h1><p class="sub">'+C+' / '+T+' lectures complete ('+pc(C,T)+'%)</p><div class="bar"><i style="width:'+pc(C,T)+'%;background:var(--blue)"></i></div><div class="ov">';
-  D.forEach(function(s){var c=cnt(s),p=pc(c,s.tot);h+='<button class="oc" data-v="'+s.id+'"><div class="top"><span class="em">'+s.e+'</span><span class="pct" style="color:'+s.c+'">'+p+'%</span></div><b>'+s.name+'</b><p>'+s.tot+' lectures · '+c+' done · '+(s.tot-c)+' left</p><p>Travis '+pc(cnt(s,"travis"),s.tot)+'% · Hazel '+pc(cnt(s,"hazel"),s.tot)+'%</p><div class="bar" style="margin:14px 0 0"><i style="width:'+p+'%;background:'+s.c+'"></i></div></button>'});
+  h+='<h1>Your Progress</h1><p class="sub">'+C+' / '+T+' lectures complete ('+pc(C,T)+'%)</p><div class="bar"><i style="width:'+pc(C,T)+'%;background:var(--blue)"></i></div>'+bn()+'<div class="lbx" id="lb">'+lb()+'</div><div class="ov">';
+  D.forEach(function(s){var c=cnt(s),p=pc(c,s.tot);h+='<button class="oc" data-v="'+s.id+'"><div class="top"><span class="em">'+s.e+'</span><span class="pct" style="color:'+s.c+'">'+p+'%</span></div><b>'+s.name+'</b><p>'+s.tot+' lectures · '+c+' done · '+(s.tot-c)+' left</p><p>'+sw(s)+'</p><div class="bar" style="margin:14px 0 0"><i style="width:'+p+'%;background:'+s.c+'"></i></div></button>'});
   h+='</div>'}
  else{
   var s=D.filter(function(x){return x.id==view})[0],c=cnt(s),p=pc(c,s.tot);
   h+='<h1>'+s.e+' '+s.name+' <button class="tipb" data-tip="1">💡 Tips</button></h1><p class="sub">'+s.tot+' lectures · '+c+' done · '+(s.tot-c)+' left ('+p+'%)</p><div class="bar"><i style="width:'+p+'%;background:'+s.c+'"></i></div>';
-  h+='<div class="tools'+(so?' so':'')+'">'+(so?'<input class="search" id="q" placeholder="Search topic or lecture number" value="'+q.replace(/"/g,"&quot;")+'"><button class="ib" data-s="0">Cancel</button>':'')+'<div class="seg">'+["all:All","todo:Pending","done:Done"].map(function(x){var y=x.split(":");return'<button data-f="'+y[0]+'" class="'+(flt==y[0]?"on":"")+'">'+y[1]+'</button>'}).join("")+'</div>'+(so?'':'<button class="ib" data-s="1" aria-label="Search"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>')+'</div>';
+  h+='<div class="sw" id="sw">'+swl(s)+'</div>'+bn()+'<div class="tools'+(so?' so':'')+'">'+(so?'<input class="search" id="q" placeholder="Search topic or lecture number" value="'+q.replace(/"/g,"&quot;")+'"><button class="ib" data-s="0">Cancel</button>':'')+'<div class="seg">'+["all:All","todo:Pending","done:Done"].map(function(x){var y=x.split(":");return'<button data-f="'+y[0]+'" class="'+(flt==y[0]?"on":"")+'">'+y[1]+'</button>'}).join("")+'</div>'+(so?'':'<button class="ib" data-s="1" aria-label="Search"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>')+'</div>';
   var shown=0,ql=q.toLowerCase();
   s.g.forEach(function(g,gi){
    var ns=g.n.filter(function(n){var d=!!done[s.id+"-"+n];if(flt=="todo"&&d)return false;if(flt=="done"&&!d)return false;if(ql&&g.t.toLowerCase().indexOf(ql)<0&&("lecture "+n).indexOf(ql)<0&&String(n)!=ql)return false;return true});
@@ -217,26 +310,30 @@ function main(){
 }
 function render(){var y=document.querySelector("main").scrollTop,f=document.activeElement&&document.activeElement.id=="q";side();main();drawer();hint();prof();document.querySelector("main").scrollTop=y;if(f){var i=document.getElementById("q");i.focus();i.setSelectionRange(q.length,q.length)}}
 document.addEventListener("click",function(e){
- var b=e.target.closest("[data-v],[data-k],[data-f],[data-g],[data-tip],[data-s],[data-u],[data-pm]");if(!b)return;
- if(b.dataset.pm!==undefined){pmo=b.dataset.pm=="1";if(pmo)pull(me);prof();return}
- if(b.dataset.u!==undefined){var fs=!me;me=b.dataset.u;if(fs&&Object.keys(OLD).length&&!Object.keys(DONE[me]).length){DONE[me]=OLD;OLD={};done=DONE[me];save()}done=DONE[me];pmo=false;persist();render();return}
+ var b=e.target.closest("[data-v],[data-k],[data-f],[data-g],[data-tip],[data-s],[data-u],[data-pm],[data-gl],[data-nd]");if(!b)return;
+ if(b.dataset.gl!==undefined){if(!me)return;var gn=Math.max(1,Math.min(50,stats(me).goal+(+b.dataset.gl)));setP("progress/"+me+"/goal",gn);wr("progress/"+me+"/goal",gn);lastSig=sig();updLb();return}
+ if(b.dataset.nd!==undefined){nudge(b.dataset.nd);return}
+ if(b.dataset.pm!==undefined){pmo=b.dataset.pm=="1";prof();return}
+ if(b.dataset.u!==undefined){var fs=!me;me=b.dataset.u;if(fs&&Object.keys(OLD).length&&!Object.keys(DONE[me]).length){var om={};Object.keys(OLD).forEach(function(k){om[k]=1;wr("progress/"+me+"/d/"+k,1)});DONE[me]=om;OLD={}}done=DONE[me];pmo=false;persist();lastSig=sig();render();beat();return}
  if(b.dataset.s!==undefined){so=b.dataset.s=="1";if(!so)q="";render();var qi=document.getElementById("q");if(qi)qi.focus();return}
  if(b.dataset.tip!==undefined){tip=b.dataset.tip=="1";drawer();return}
  if(b.dataset.v){view=b.dataset.v;flt="all";q="";so=false;render();document.querySelector("main").scrollTop=0;return}
  if(b.dataset.f){flt=b.dataset.f;render();return}
- if(b.dataset.k){try{navigator.vibrate&&navigator.vibrate(8)}catch(x){}var k=b.dataset.k;if(done[k])delete done[k];else done[k]=1;save();render();return}
- if(b.dataset.g!==undefined){var s=D.filter(function(x){return x.id==view})[0],g=s.g[+b.dataset.g],all=g.n.every(function(n){return done[s.id+"-"+n]});g.n.forEach(function(n){if(all)delete done[s.id+"-"+n];else done[s.id+"-"+n]=1});save();render()}
+ if(b.dataset.k){try{navigator.vibrate&&navigator.vibrate(8)}catch(x){}var k=b.dataset.k;mark(k,!done[k]);persist();lastSig=sig();if(flt=="all")quick(b);else render();return}
+ if(b.dataset.g!==undefined){var s=D.filter(function(x){return x.id==view})[0],g=s.g[+b.dataset.g],all=g.n.every(function(n){return done[s.id+"-"+n]});g.n.forEach(function(n){var kk=s.id+"-"+n;if(all){if(done[kk])mark(kk,false)}else if(!done[kk])mark(kk,true)});persist();lastSig=sig();render()}
 });
 document.addEventListener("input",function(e){if(e.target.id=="q"){q=e.target.value;render()}});
 function hint(){var a=document.getElementById("side"),h=document.getElementById("hint");if(!a||!h)return;h.classList.toggle("off",a.scrollWidth<=a.clientWidth+4||a.scrollLeft+a.clientWidth>=a.scrollWidth-8)}
 document.getElementById("side").addEventListener("scroll",hint);window.addEventListener("resize",hint);
 function pcAll(u){var a=0,c=0;D.forEach(function(s){a+=s.tot;c+=cnt(s,u)});return pc(c,a)}
 function prof(){var e=document.getElementById("pf"),k=document.getElementById("pk");if(!e||!k)return;
- if(!me){k.innerHTML='<div class="ovl2"><div class="pkc"><h2>Who is studying?</h2><p>Pick your profile. No password needed.</p><div class="pkr">'+["travis","hazel"].map(function(u){return'<button class="pkb" data-u="'+u+'"><i class="av '+u+'">'+NM[u][0]+'</i><b>'+NM[u]+'</b><small>'+pcAll(u)+'% done</small></button>'}).join("")+'</div></div></div>';e.innerHTML="";return}
- k.innerHTML="";var h='<button class="chip" data-pm="1"><i class="av '+me+'">'+NM[me][0]+'</i><span>'+NM[me]+'</span></button>';
- if(pmo)h+='<div class="pov" data-pm="0"></div><div class="pop">'+["travis","hazel"].map(function(u){var p=pcAll(u);return'<button class="pi" data-u="'+u+'"><i class="av '+u+'">'+NM[u][0]+'</i><span><b>'+NM[u]+(u==me?" (you)":"")+'</b><em>'+p+'% complete</em><span class="pb"><i style="width:'+p+'%"></i></span></span></button>'}).join("")+'<small class="syn">'+SY+'</small></div>';
+ if(!me){k.innerHTML='<div class="ovl2"><div class="pkc"><h2>Who is studying?</h2><p>Pick your profile. No password needed.</p><div class="pkr">'+["travis","hazel"].map(function(u){return'<button class="pkb" data-u="'+u+'">'+AV(u)+'<b>'+NM[u]+'</b><small>'+pcAll(u)+'% done</small></button>'}).join("")+'</div></div></div>';e.innerHTML="";return}
+ k.innerHTML="";var h='<button class="chip" data-pm="1">'+AV(me)+'<span>'+NM[me]+'</span></button>';
+ if(pmo)h+='<div class="pov" data-pm="0"></div><div class="pop">'+["travis","hazel"].map(function(u){var p=pcAll(u);return'<button class="pi" data-u="'+u+'">'+AV(u)+'<span><b>'+NM[u]+(u==me?" (you)":"")+'</b><em>'+p+'% complete</em><span class="pb"><i style="width:'+p+'%"></i></span></span></button>'}).join("")+'<small class="syn">'+SY+'</small></div>';
  e.innerHTML=h}
-render();
+render();conn();beat();setInterval(beat,5000);setInterval(updLb,5000);
+document.addEventListener("visibilitychange",function(){if(!document.hidden){if(URL_&&(!es||es.readyState==2))conn();flush();beat()}});
+window.addEventListener("online",function(){conn();flush()});
 </script>
 </body>
 </html>
